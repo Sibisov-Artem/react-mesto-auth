@@ -1,0 +1,12 @@
+.place__wastebasket-btn {
+  width: 18px;
+  height: 19px;
+  background-image: url(../../../images/wastebasket-btn.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+  border: none;
+  background-color: transparent;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}

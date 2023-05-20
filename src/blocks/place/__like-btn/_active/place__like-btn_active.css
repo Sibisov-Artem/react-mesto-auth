@@ -1,0 +1,9 @@
+.place__like-btn_active {
+  width: 22px;
+  height: 19px;
+  background-image: url(../../../../images/place__like-btn_active.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+  border: none;
+  background-color: transparent;
+}
