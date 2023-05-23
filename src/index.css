@@ -62,5 +62,4 @@
 @import url(./blocks/auth/__form/auth__form.css);
 @import url(./blocks/auth/__input-container/auth__input-container.css);
 @import url(./blocks/auth/__input/auth__input.css);
-@import url(./blocks/auth/__input-error/auth__input-error.css);
 @import url(./blocks/auth/__submit-btn/auth__submit-btn.css);

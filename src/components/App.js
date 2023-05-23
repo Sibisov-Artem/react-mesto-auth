@@ -53,7 +53,7 @@ function App() {  //функциональный компонент App
     setSelectedCard(props);
   }
 
-  const [loggedIn, setLoggedIn] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(true);
   function handleLogin() {
     setLoggedIn(true);
   }
