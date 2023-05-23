@@ -9,6 +9,7 @@ import ImagePopup from './ImagePopup';
 import EditProfilePopup from './EditProfilePopup';
 import EditAvatarPopup from './EditAvatarPopup';
 import AddPlacePopup from './AddPlacePopup';
+import Login from './Login';
 
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 
@@ -149,13 +150,14 @@ function App() {  //функциональный компонент App
 
             <Routes>
 
-              <Route>
-                {/* sign-up - регистрация */}
-                path='/sign-up' element={/*<Register />*/}
-              </Route>
+              {/* sign-up - регистрация */}
+              <Route
+
+                path='/sign-up' /*element={<Register />}*/
+              />
 
               {/* sign-in - авторизация, вход, страница входа */}
-              <Route> path='/sign-in' element={/*<Login />*/} </Route>
+              <Route path='/sign-in' element={<Login /*onAuthorization={handleAuthorization}*/ />} />
               <Route path="/" element={loggedIn ? <Navigate to='/' /> : <Navigate to='/sign-in' />} replace />
 
 
