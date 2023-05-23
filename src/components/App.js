@@ -10,6 +10,7 @@ import EditProfilePopup from './EditProfilePopup';
 import EditAvatarPopup from './EditAvatarPopup';
 import AddPlacePopup from './AddPlacePopup';
 import Login from './Login';
+import ProtectedRouteElement from './ProtectedRoute';
 
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 
@@ -151,20 +152,25 @@ function App() {  //функциональный компонент App
             <Routes>
 
               {/* sign-up - регистрация */}
-              <Route
-
-                path='/sign-up' /*element={<Register />}*/
-              />
+              <Route path='/sign-up' /*element={<Register />}*/ />
 
               {/* sign-in - авторизация, вход, страница входа */}
               <Route path='/sign-in' element={<Login /*onAuthorization={handleAuthorization}*/ />} />
-              <Route path="/" element={loggedIn ? <Navigate to='/' /> : <Navigate to='/sign-in' />} replace />
+              <Route path="/" element={<ProtectedRouteElement element={Main} loggedIn={loggedIn}
+                cards={cards}
+                onEditProfile={handleEditProfileClick}
+                onAddPlace={handleAddPlaceClick}
+                onEditAvatar={handleEditAvatarClick}
+                onCardClick={handleCardClick}
+                onCardLike={handleCardLike}
+                onCardDelete={handleCardDelete}
+              />} />
 
 
 
             </Routes>
 
-
+            {/* 
             <Main
               cards={cards}
               onEditProfile={handleEditProfileClick}
@@ -173,7 +179,7 @@ function App() {  //функциональный компонент App
               onCardClick={handleCardClick}
               onCardLike={handleCardLike}
               onCardDelete={handleCardDelete}
-            />
+            /> */}
 
             <Footer />
 
