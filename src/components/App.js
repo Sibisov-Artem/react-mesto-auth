@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { api } from '../utils/Api';
 import Header from './Header';
 import Main from './Main';
@@ -48,6 +49,11 @@ function App() {  //функциональный компонент App
   const [selectedCard, setSelectedCard] = useState({ name: '', link: '' });
   function handleCardClick(props) {
     setSelectedCard(props);
+  }
+
+  const [loggedIn, setLoggedIn] = useState(false);
+  function handleLogin() {
+    setLoggedIn(true);
   }
 
   function handleCardLike(card) {
@@ -129,64 +135,86 @@ function App() {  //функциональный компонент App
 
 
   return (
-    <CurrentUserContext.Provider value={currentUser}>
+    //BrowserRouter- для синхронизации пользовательского интерфейса с URL.Это родительский компонент, который используется для хранения всех остальных компонентов
+    // Компонент BrowserRouter отслеживает историю навигации в процессе работы ReactRouter. 
+    // Когда пользователь переходит назад или вперёд в браузере, BrowserRouter синхронизирует отображаемый контент.
+    <BrowserRouter>
+      <CurrentUserContext.Provider value={currentUser}>
 
-      <div className="root">
+        <div className="root">
 
-        <div className="page">
+          <div className="page">
 
-          <Header />
+            <Header />
 
-          <Main
-            cards={cards}
-            onEditProfile={handleEditProfileClick}
-            onAddPlace={handleAddPlaceClick}
-            onEditAvatar={handleEditAvatarClick}
-            onCardClick={handleCardClick}
-            onCardLike={handleCardLike}
-            onCardDelete={handleCardDelete}
+            <Routes>
+
+              <Route>
+                {/* sign-up - регистрация */}
+                path='/sign-up' element={/*<Register />*/}
+              </Route>
+
+              {/* sign-in - авторизация, вход, страница входа */}
+              <Route> path='/sign-in' element={/*<Login />*/} </Route>
+              <Route path="/" element={loggedIn ? <Navigate to='/' /> : <Navigate to='/sign-in' />} replace />
+
+
+
+            </Routes>
+
+
+            <Main
+              cards={cards}
+              onEditProfile={handleEditProfileClick}
+              onAddPlace={handleAddPlaceClick}
+              onEditAvatar={handleEditAvatarClick}
+              onCardClick={handleCardClick}
+              onCardLike={handleCardLike}
+              onCardDelete={handleCardDelete}
+            />
+
+            <Footer />
+
+          </div>
+
+          <EditProfilePopup
+            isOpen={isEditProfilePopupOpen}
+            onClose={closeAllPopups}
+            onUpdateUser={handleUpdateUser}
           />
 
-          <Footer />
+          <AddPlacePopup
+            isOpen={isAddPlacePopupOpen}
+            onClose={closeAllPopups}
+            onAddPlace={handleAddPlaceSubmit}
+          />
+
+
+
+          <ImagePopup
+            onClose={closeAllPopups}
+            card={selectedCard}
+          />
+
+
+
+          <PopupWithForm
+            name='confirmation-remove'
+            title='Вы уверены?'
+            submitText='Да'
+          />
+
+
+          <EditAvatarPopup
+            isOpen={isEditAvatarPopupOpen}
+            onClose={closeAllPopups}
+            onUpdateAvatar={onUpdateAvatar}
+          />
+
 
         </div>
-
-        <EditProfilePopup
-          isOpen={isEditProfilePopupOpen}
-          onClose={closeAllPopups}
-          onUpdateUser={handleUpdateUser}
-        />
-
-        <AddPlacePopup
-          isOpen={isAddPlacePopupOpen}
-          onClose={closeAllPopups}
-          onAddPlace={handleAddPlaceSubmit}
-        />
-
-
-
-        <ImagePopup
-          onClose={closeAllPopups}
-          card={selectedCard}
-        />
-
-
-
-        <PopupWithForm
-          name='confirmation-remove'
-          title='Вы уверены?'
-          submitText='Да'
-        />
-
-
-        <EditAvatarPopup
-          isOpen={isEditAvatarPopupOpen}
-          onClose={closeAllPopups}
-          onUpdateAvatar={onUpdateAvatar}
-        />
-
-      </div>
-    </CurrentUserContext.Provider>
+      </CurrentUserContext.Provider>
+    </BrowserRouter>
   );
 }
 
