@@ -39,7 +39,7 @@ function Login(props) {
 
                         <span className="auth__input-error profileEmail-error"></span>
 
-                        <input className="auth__input auth__input_el_password" type="text" name="password" placeholder="Пароль"
+                        <input className="auth__input auth__input_el_password" type="password" name="password" placeholder="Пароль"
                             required minLength="2" maxLength="200" id="profilePassword"
                             onChange={handleChangePassword}
                             value={password}
