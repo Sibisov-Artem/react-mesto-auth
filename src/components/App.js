@@ -10,6 +10,7 @@ import EditProfilePopup from './EditProfilePopup';
 import EditAvatarPopup from './EditAvatarPopup';
 import AddPlacePopup from './AddPlacePopup';
 import Login from './Login';
+import Register from './Register';
 import ProtectedRouteElement from './ProtectedRoute';
 
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
@@ -53,7 +54,7 @@ function App() {  //функциональный компонент App
     setSelectedCard(props);
   }
 
-  const [loggedIn, setLoggedIn] = useState(true);
+  const [loggedIn, setLoggedIn] = useState(false);
   function handleLogin() {
     setLoggedIn(true);
   }
@@ -152,7 +153,7 @@ function App() {  //функциональный компонент App
             <Routes>
 
               {/* sign-up - регистрация */}
-              <Route path='/sign-up' /*element={<Register />}*/ />
+              <Route path='/sign-up' element={<Register /*onRegistration={handleRegistration}*/ />} />
 
               {/* sign-in - авторизация, вход, страница входа */}
               <Route path='/sign-in' element={<Login /*onAuthorization={handleAuthorization}*/ />} />
