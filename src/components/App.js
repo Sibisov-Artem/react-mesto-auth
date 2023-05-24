@@ -11,6 +11,7 @@ import EditAvatarPopup from './EditAvatarPopup';
 import AddPlacePopup from './AddPlacePopup';
 import Login from './Login';
 import Register from './Register';
+import InfoTooltip from './InfoTooltip';
 import ProtectedRouteElement from './ProtectedRoute';
 
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
@@ -49,12 +50,16 @@ function App() {  //функциональный компонент App
     setIsEditAvatarPopupOpen(true);
   }
 
+  const [isInfoTooltipPopupOpen, setIsInfoTooltipPopupOpen] = useState(false);
+  const [successAuthResponse, setSuccessAuthResponse] = useState(false);
+
+
   const [selectedCard, setSelectedCard] = useState({ name: '', link: '' });
   function handleCardClick(props) {
     setSelectedCard(props);
   }
 
-  const [loggedIn, setLoggedIn] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(true);
   function handleLogin() {
     setLoggedIn(true);
   }
@@ -134,6 +139,7 @@ function App() {  //функциональный компонент App
     setIsAddPlacePopupOpen(false);
     setIsEditAvatarPopupOpen(false);
     setSelectedCard({ name: '', link: '' });
+    setIsInfoTooltipPopupOpen(false)
   }
 
 
@@ -218,6 +224,12 @@ function App() {  //функциональный компонент App
             isOpen={isEditAvatarPopupOpen}
             onClose={closeAllPopups}
             onUpdateAvatar={onUpdateAvatar}
+          />
+
+          <InfoTooltip
+            isOpen={isInfoTooltipPopupOpen}
+            onClose={closeAllPopups}
+            successAuthResponse={successAuthResponse}
           />
 
 
