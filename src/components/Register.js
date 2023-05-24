@@ -51,7 +51,7 @@ function Register(props) {
                     </fieldset>
                     <button className="auth__submit-btn" type="submit">Зарегистрироваться</button>
                     <div className="auth__signin">
-                        <p className="auth__signin-text" >Уже зарегистрированы? <Link to="sign-in" className="auth__login-link">Войти</Link> </p>
+                        <p className="auth__signin-text" >Уже зарегистрированы? <Link to="/sign-in" className="auth__login-link">Войти</Link> </p>
 
                     </div>
 
