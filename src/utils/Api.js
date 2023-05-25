@@ -26,6 +26,20 @@ class Api {
     })
   }
 
+  // было ранее так:
+  /*
+  getUser() {
+    return fetch(`${this.url}/users/me`, {
+      headers: this.headers
+    })
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        }
+        return Promise.reject(`Что-то пошло не так: ${res.status}`);
+      })
+  }*/
+
   // запрос карточек
   getInitialCards() {
     return this._request(`${this.url}/cards`, {

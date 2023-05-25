@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { api } from '../utils/Api';
+import { register } from '../utils/AuthApi';
+
 import Header from './Header';
 import Main from './Main';
 import Footer from './Footer';
@@ -59,7 +61,7 @@ function App() {  //функциональный компонент App
     setSelectedCard(props);
   }
 
-  const [loggedIn, setLoggedIn] = useState(true);
+  const [loggedIn, setLoggedIn] = useState(false);
   function handleLogin() {
     setLoggedIn(true);
   }
@@ -142,6 +144,16 @@ function App() {  //функциональный компонент App
     setIsInfoTooltipPopupOpen(false)
   }
 
+  function handleRegistration(inputData) {
+    register(inputData)
+      .then((data) => {
+        console.log(data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
 
   return (
     //BrowserRouter- для синхронизации пользовательского интерфейса с URL.Это родительский компонент, который используется для хранения всех остальных компонентов
@@ -159,7 +171,7 @@ function App() {  //функциональный компонент App
             <Routes>
 
               {/* sign-up - регистрация */}
-              <Route path='/sign-up' element={<Register /*onRegistration={handleRegistration}*/ />} />
+              <Route path='/sign-up' element={<Register onRegistration={handleRegistration} />} />
 
               {/* sign-in - авторизация, вход, страница входа */}
               <Route path='/sign-in' element={<Login /*onAuthorization={handleAuthorization}*/ />} />
