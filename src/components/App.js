@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { api } from '../utils/Api';
-import { register, login } from '../utils/AuthApi';
+import { register, login, getContent } from '../utils/AuthApi';
 
 import Header from './Header';
 import Main from './Main';
@@ -157,12 +157,26 @@ function App() {  //функциональный компонент App
   function handleAuthorization(inputData) {
     login(inputData)
       .then((data) => {
+        localStorage.setItem("jwt", data.token);
         console.log(data);
       })
       .catch((err) => {
         console.log(err);
       });
   }
+
+function checkToken() {
+  const jwt = localStorage.getItem('jwt');
+  getContent(jwt)
+  .then((data) => {
+console.log(data)
+  })
+}
+
+useEffect(() =>{
+  checkToken();
+}, [])
+
 
 
   return (

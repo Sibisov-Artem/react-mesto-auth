@@ -26,4 +26,15 @@ export const login = (inputData) => {
         }),
     })
         .then(res => res.ok ? res.json() : Promise.reject(`Ошибка:  ${res.status}`));
-} 
+};
+
+export const getContent = (token) => {
+    return fetch(`${BASE_URL}/users/me`, {
+        method: 'GET',
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`,
+        },
+    })
+        .then(res => res.ok ? res.json() : Promise.reject(`Ошибка getContent: ${res.status}`));
+};
