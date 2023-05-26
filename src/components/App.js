@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { Routes, Route, useNavigate } from 'react-router-dom';
 import { api } from '../utils/Api';
 import { register, login, getContent } from '../utils/AuthApi';
 
@@ -62,9 +62,6 @@ function App() {  //функциональный компонент App
   }
 
   const [loggedIn, setLoggedIn] = useState(false);
-  function handleLogin() {
-    setLoggedIn(true);
-  }
 
   function handleCardLike(card) {
     // Снова проверяем, есть ли уже лайк на этой карточке
@@ -144,12 +141,15 @@ function App() {  //функциональный компонент App
     setIsInfoTooltipPopupOpen(false)
   }
 
+  const navigate = useNavigate();
+
   function handleRegistration(inputData) {
     register(inputData)
       .then((data) => {
         console.log(data);
         setSuccessAuthResponse(true);
         setIsInfoTooltipPopupOpen(true);
+        navigate('/sign-in');
       })
       .catch((err) => {
         console.log(err);
@@ -165,6 +165,9 @@ function App() {  //функциональный компонент App
         console.log(data);
         setSuccessAuthResponse(true);
         setIsInfoTooltipPopupOpen(true);
+        setLoggedIn(true);
+        navigate('/');
+        console.log(`handleAuthorization loggedIn: ${loggedIn}`);
       })
       .catch((err) => {
         console.log(err);
@@ -177,7 +180,11 @@ function App() {  //функциональный компонент App
     const jwt = localStorage.getItem('jwt');
     getContent(jwt)
       .then((data) => {
-        console.log(data)
+        console.log(data);
+        setLoggedIn(true);
+        console.log(loggedIn)
+        console.log(`checkToken loggedIn: ${loggedIn}`);
+
       })
   }
 
@@ -191,7 +198,6 @@ function App() {  //функциональный компонент App
     //BrowserRouter- для синхронизации пользовательского интерфейса с URL.Это родительский компонент, который используется для хранения всех остальных компонентов
     // Компонент BrowserRouter отслеживает историю навигации в процессе работы ReactRouter. 
     // Когда пользователь переходит назад или вперёд в браузере, BrowserRouter синхронизирует отображаемый контент.
-
     <CurrentUserContext.Provider value={currentUser}>
 
       <div className="root">
