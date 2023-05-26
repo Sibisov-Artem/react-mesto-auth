@@ -13,3 +13,17 @@ export const register = (inputData) => {
     })
         .then(res => res.ok ? res.json() : Promise.reject(`Ошибка:  ${res.status}`));
 };
+
+export const login = (inputData) => {
+    return fetch(`${BASE_URL}/signin`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            email: inputData.email,
+            password: inputData.password
+        }),
+    })
+        .then(res => res.ok ? res.json() : Promise.reject(`Ошибка:  ${res.status}`));
+} 
