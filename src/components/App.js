@@ -148,9 +148,13 @@ function App() {  //функциональный компонент App
     register(inputData)
       .then((data) => {
         console.log(data);
+        setSuccessAuthResponse(true);
+        setIsInfoTooltipPopupOpen(true);
       })
       .catch((err) => {
         console.log(err);
+        setSuccessAuthResponse(false);
+        setIsInfoTooltipPopupOpen(true);
       });
   }
 
@@ -159,23 +163,27 @@ function App() {  //функциональный компонент App
       .then((data) => {
         localStorage.setItem("jwt", data.token);
         console.log(data);
+        setSuccessAuthResponse(true);
+        setIsInfoTooltipPopupOpen(true);
       })
       .catch((err) => {
         console.log(err);
+        setSuccessAuthResponse(false);
+        setIsInfoTooltipPopupOpen(true);
       });
   }
 
-function checkToken() {
-  const jwt = localStorage.getItem('jwt');
-  getContent(jwt)
-  .then((data) => {
-console.log(data)
-  })
-}
+  function checkToken() {
+    const jwt = localStorage.getItem('jwt');
+    getContent(jwt)
+      .then((data) => {
+        console.log(data)
+      })
+  }
 
-useEffect(() =>{
-  checkToken();
-}, [])
+  useEffect(() => {
+    checkToken();
+  }, [])
 
 
 
