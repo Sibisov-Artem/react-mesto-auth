@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import { api } from '../utils/Api';
 import { register, login, getContent } from '../utils/AuthApi';
 
@@ -191,37 +191,37 @@ function App() {  //функциональный компонент App
     //BrowserRouter- для синхронизации пользовательского интерфейса с URL.Это родительский компонент, который используется для хранения всех остальных компонентов
     // Компонент BrowserRouter отслеживает историю навигации в процессе работы ReactRouter. 
     // Когда пользователь переходит назад или вперёд в браузере, BrowserRouter синхронизирует отображаемый контент.
-    <BrowserRouter>
-      <CurrentUserContext.Provider value={currentUser}>
 
-        <div className="root">
+    <CurrentUserContext.Provider value={currentUser}>
 
-          <div className="page">
+      <div className="root">
 
-            <Header />
+        <div className="page">
 
-            <Routes>
+          <Header />
 
-              {/* sign-up - регистрация */}
-              <Route path='/sign-up' element={<Register onRegistration={handleRegistration} />} />
+          <Routes>
 
-              {/* sign-in - авторизация, вход, страница входа */}
-              <Route path='/sign-in' element={<Login onAuthorization={handleAuthorization} />} />
-              <Route path="/" element={<ProtectedRouteElement element={Main} loggedIn={loggedIn}
-                cards={cards}
-                onEditProfile={handleEditProfileClick}
-                onAddPlace={handleAddPlaceClick}
-                onEditAvatar={handleEditAvatarClick}
-                onCardClick={handleCardClick}
-                onCardLike={handleCardLike}
-                onCardDelete={handleCardDelete}
-              />} />
+            {/* sign-up - регистрация */}
+            <Route path='/sign-up' element={<Register onRegistration={handleRegistration} />} />
+
+            {/* sign-in - авторизация, вход, страница входа */}
+            <Route path='/sign-in' element={<Login onAuthorization={handleAuthorization} />} />
+            <Route path="/" element={<ProtectedRouteElement element={Main} loggedIn={loggedIn}
+              cards={cards}
+              onEditProfile={handleEditProfileClick}
+              onAddPlace={handleAddPlaceClick}
+              onEditAvatar={handleEditAvatarClick}
+              onCardClick={handleCardClick}
+              onCardLike={handleCardLike}
+              onCardDelete={handleCardDelete}
+            />} />
 
 
 
-            </Routes>
+          </Routes>
 
-            {/* 
+          {/* 
             <Main
               cards={cards}
               onEditProfile={handleEditProfileClick}
@@ -232,54 +232,53 @@ function App() {  //функциональный компонент App
               onCardDelete={handleCardDelete}
             /> */}
 
-            <Footer />
-
-          </div>
-
-          <EditProfilePopup
-            isOpen={isEditProfilePopupOpen}
-            onClose={closeAllPopups}
-            onUpdateUser={handleUpdateUser}
-          />
-
-          <AddPlacePopup
-            isOpen={isAddPlacePopupOpen}
-            onClose={closeAllPopups}
-            onAddPlace={handleAddPlaceSubmit}
-          />
-
-
-
-          <ImagePopup
-            onClose={closeAllPopups}
-            card={selectedCard}
-          />
-
-
-
-          <PopupWithForm
-            name='confirmation-remove'
-            title='Вы уверены?'
-            submitText='Да'
-          />
-
-
-          <EditAvatarPopup
-            isOpen={isEditAvatarPopupOpen}
-            onClose={closeAllPopups}
-            onUpdateAvatar={onUpdateAvatar}
-          />
-
-          <InfoTooltip
-            isOpen={isInfoTooltipPopupOpen}
-            onClose={closeAllPopups}
-            successAuthResponse={successAuthResponse}
-          />
-
+          <Footer />
 
         </div>
-      </CurrentUserContext.Provider>
-    </BrowserRouter>
+
+        <EditProfilePopup
+          isOpen={isEditProfilePopupOpen}
+          onClose={closeAllPopups}
+          onUpdateUser={handleUpdateUser}
+        />
+
+        <AddPlacePopup
+          isOpen={isAddPlacePopupOpen}
+          onClose={closeAllPopups}
+          onAddPlace={handleAddPlaceSubmit}
+        />
+
+
+
+        <ImagePopup
+          onClose={closeAllPopups}
+          card={selectedCard}
+        />
+
+
+
+        <PopupWithForm
+          name='confirmation-remove'
+          title='Вы уверены?'
+          submitText='Да'
+        />
+
+
+        <EditAvatarPopup
+          isOpen={isEditAvatarPopupOpen}
+          onClose={closeAllPopups}
+          onUpdateAvatar={onUpdateAvatar}
+        />
+
+        <InfoTooltip
+          isOpen={isInfoTooltipPopupOpen}
+          onClose={closeAllPopups}
+          successAuthResponse={successAuthResponse}
+        />
+
+
+      </div>
+    </CurrentUserContext.Provider>
   );
 }
 
