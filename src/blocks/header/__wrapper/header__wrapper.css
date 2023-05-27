@@ -1,0 +1,6 @@
+.header__wrapper {
+    display: flex;
+    align-items: center;
+    padding-bottom: 40px;
+    outline: red 1px solid;
+}

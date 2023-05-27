@@ -177,12 +177,15 @@ function App() {  //функциональный компонент App
   }
 
   const location = useLocation();
-  
+
+  const [email, setEmail] = useState('');
+
   function checkToken() {
     const jwt = localStorage.getItem('jwt');
     getContent(jwt)
       .then((data) => {
         console.log(data);
+        setEmail(data.data.email);
         setLoggedIn(true);
         navigate(location.pathname); //чтоб оставаться при обновлении страницы на том же месте где и были
         console.log(`checkToken loggedIn: ${loggedIn}`);
@@ -203,7 +206,7 @@ function App() {  //функциональный компонент App
 
         <div className="page">
 
-          <Header />
+          <Header email={email} />
 
           <Routes>
 
