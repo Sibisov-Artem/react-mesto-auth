@@ -1,7 +1,7 @@
 
 import { useLocation, Link } from "react-router-dom";
 
-function Header({ email }) {
+function Header({ email, onSignOut }) {
 
     const location = useLocation();
 
@@ -13,7 +13,7 @@ function Header({ email }) {
                 <ul className="header__nav">
                     {location.pathname === "/sign-in" && <li><Link to="/sign-up" className="header__link">Регистрация</Link></li>}
                     {location.pathname === "/sign-up" && <li><Link to="/sign-in" className="header__link">Войти</Link></li>}
-                    {location.pathname === "/" && <li><Link to="/sign-in" className="header__link header__link_out">Выйти</Link></li>}
+                    {location.pathname === "/" && <li><Link to="/sign-in" className="header__link header__link_out" onClick={onSignOut}>Выйти</Link></li>}
                 </ul>
             </div>
         </header>

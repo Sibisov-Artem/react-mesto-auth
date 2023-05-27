@@ -146,7 +146,6 @@ function App() {  //функциональный компонент App
   function handleRegistration(inputData) {
     register(inputData)
       .then((data) => {
-        console.log(data);
         setSuccessAuthResponse(true);
         setIsInfoTooltipPopupOpen(true);
         navigate('/sign-in');
@@ -162,12 +161,10 @@ function App() {  //функциональный компонент App
     login(inputData)
       .then((data) => {
         localStorage.setItem("jwt", data.token);
-        console.log(data);
         setSuccessAuthResponse(true);
         setIsInfoTooltipPopupOpen(true);
         setLoggedIn(true);
         navigate('/');
-        console.log(`handleAuthorization loggedIn: ${loggedIn}`);
       })
       .catch((err) => {
         console.log(err);
@@ -184,12 +181,9 @@ function App() {  //функциональный компонент App
     const jwt = localStorage.getItem('jwt');
     getContent(jwt)
       .then((data) => {
-        console.log(data);
         setEmail(data.data.email);
         setLoggedIn(true);
         navigate(location.pathname); //чтоб оставаться при обновлении страницы на том же месте где и были
-        console.log(`checkToken loggedIn: ${loggedIn}`);
-
       })
   }
 
@@ -197,7 +191,10 @@ function App() {  //функциональный компонент App
     checkToken();
   }, [])
 
-
+  function onSignOut() {
+    localStorage.removeItem('jwt');
+    setLoggedIn(false);
+  }
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -206,7 +203,9 @@ function App() {  //функциональный компонент App
 
         <div className="page">
 
-          <Header email={email} />
+          <Header
+            email={email}
+            onSignOut={onSignOut} />
 
           <Routes>
 
