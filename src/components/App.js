@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Routes, Route, useNavigate } from 'react-router-dom';
+import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 import { api } from '../utils/Api';
 import { register, login, getContent } from '../utils/AuthApi';
 
@@ -176,13 +176,15 @@ function App() {  //функциональный компонент App
       });
   }
 
+  const location = useLocation();
+  
   function checkToken() {
     const jwt = localStorage.getItem('jwt');
     getContent(jwt)
       .then((data) => {
         console.log(data);
         setLoggedIn(true);
-        console.log(loggedIn)
+        navigate(location.pathname); //чтоб оставаться при обновлении страницы на том же месте где и были
         console.log(`checkToken loggedIn: ${loggedIn}`);
 
       })
