@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 import { api } from '../utils/Api';
-import { register, login, getContent } from '../utils/AuthApi';
+import { register, login, checkToken } from '../utils/AuthApi';
 
 import Header from './Header';
 import Main from './Main';
@@ -177,19 +177,24 @@ function App() {  //функциональный компонент App
 
   const [email, setEmail] = useState('');
 
-  function checkToken() {
+  function handleCheckToken() {
     const jwt = localStorage.getItem('jwt');
-    getContent(jwt)
-      .then((data) => {
-        setEmail(data.data.email);
-        setLoggedIn(true);
-        navigate(location.pathname); //чтоб оставаться при обновлении страницы на том же месте где и были
-      })
+    if (jwt) {
+      checkToken(jwt)
+        .then((data) => {
+          setEmail(data.data.email);
+          setLoggedIn(true);
+          navigate(location.pathname); //чтоб оставаться при обновлении страницы на том же месте где и были
+        })
+        .catch((err) => {
+          console.log(err); // выведем ошибку в консоль
+        });
+    }
   }
 
   useEffect(() => {
-    checkToken();
-  }, [])
+    handleCheckToken();
+  }, [loggedIn])
 
   function onSignOut() {
     localStorage.removeItem('jwt');
