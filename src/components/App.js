@@ -63,6 +63,8 @@ function App() {  //функциональный компонент App
 
   const [loggedIn, setLoggedIn] = useState(false);
 
+  const [isLoading, setIsLoading] = useState(false);
+
   function handleCardLike(card) {
     // Снова проверяем, есть ли уже лайк на этой карточке
     const isLiked = card.likes.some(i => i._id === currentUser._id);
@@ -99,6 +101,7 @@ function App() {  //функциональный компонент App
   }, [])
 
   function handleUpdateUser(inputData) {
+    setIsLoading(true);
     api.editUser(inputData)
       .then((data) => {
         setCurrentUser(data);
@@ -106,10 +109,14 @@ function App() {  //функциональный компонент App
       })
       .catch((err) => {
         console.log(err);
-      });
+      })
+      .finally(() => {
+        setIsLoading(false);
+      })
   }
 
   function onUpdateAvatar(inputData) {
+    setIsLoading(true);
     api.changeAvatar(inputData)
       .then((data) => {
         setCurrentUser(data);
@@ -117,10 +124,14 @@ function App() {  //функциональный компонент App
       })
       .catch((err) => {
         console.log(err);
-      });
+      })
+      .finally(() => {
+        setIsLoading(false);
+      })
   }
 
   function handleAddPlaceSubmit(inputData) {
+    setIsLoading(true);
     api.addNewCard(inputData)
       .then((newCard) => {
         setCards([newCard, ...cards]);
@@ -129,7 +140,10 @@ function App() {  //функциональный компонент App
       })
       .catch((err) => {
         console.log(err);
-      });
+      })
+      .finally(() => {
+        setIsLoading(false);
+      })
 
   }
 
@@ -252,12 +266,14 @@ function App() {  //функциональный компонент App
           isOpen={isEditProfilePopupOpen}
           onClose={closeAllPopups}
           onUpdateUser={handleUpdateUser}
+          submitText={isLoading ? 'Сохранение' : 'Сохранить'}
         />
 
         <AddPlacePopup
           isOpen={isAddPlacePopupOpen}
           onClose={closeAllPopups}
           onAddPlace={handleAddPlaceSubmit}
+          submitText={isLoading ? 'Создание' : 'Создать'}
         />
 
 
@@ -280,6 +296,7 @@ function App() {  //функциональный компонент App
           isOpen={isEditAvatarPopupOpen}
           onClose={closeAllPopups}
           onUpdateAvatar={onUpdateAvatar}
+          submitText={isLoading ? 'Сохранение' : 'Сохранить'}
         />
 
         <InfoTooltip

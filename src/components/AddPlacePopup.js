@@ -78,7 +78,7 @@ export function useForm(inputValues={}) {
         <PopupWithForm
             name='mesto'
             title='Новое место'
-            submitText='Создать'
+            submitText={props.submitText}
             isOpen={props.isOpen}
             onClose={props.onClose}
             onSubmit={handleSubmit}
