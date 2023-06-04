@@ -1,6 +1,7 @@
 import PopupWithForm from "./PopupWithForm";
-import { /*useState,*/ useEffect } from "react";
+import { /*useState,*/ useEffect, useContext } from "react";
 import useForm from "./hooks/useForm";
+import { AppContext } from "../contexts/AppContext";
 
 function AddPlacePopup(props) {
 
@@ -9,7 +10,7 @@ function AddPlacePopup(props) {
         setName(e.target.value);
     }
 */
-
+    const isLoading = useContext(AppContext);
     const { values, handleChange, setValues } = useForm({});
 
     /*
@@ -78,7 +79,7 @@ export function useForm(inputValues={}) {
         <PopupWithForm
             name='mesto'
             title='Новое место'
-            submitText={props.submitText}
+            submitText={isLoading ? 'Создание' : 'Создать'}
             isOpen={props.isOpen}
             onClose={props.onClose}
             onSubmit={handleSubmit}

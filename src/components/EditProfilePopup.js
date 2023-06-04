@@ -1,6 +1,7 @@
 import PopupWithForm from "./PopupWithForm";
 import { useState, useContext, useEffect } from "react";
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
+import { AppContext } from "../contexts/AppContext";
 
 
 // Внутри EditProfilePopup добавьте стейт-переменные name и description и привяжите их к полям ввода, сделав их управляемыми. Не забудьте про обработчики onChange.
@@ -21,6 +22,7 @@ function EditProfilePopup(props) {
 
     // Подписка на контекст
     const currentUser = useContext(CurrentUserContext);
+    const isLoading = useContext(AppContext);
 
     // После загрузки текущего пользователя из API
     // его данные будут использованы в управляемых компонентах.
@@ -44,7 +46,7 @@ function EditProfilePopup(props) {
         <PopupWithForm
             name='profile'
             title='Редактировать профиль'
-            submitText={props.submitText}
+            submitText={isLoading ? 'Сохранение' : 'Сохранить'}
             isOpen={props.isOpen}
             onClose={props.onClose}
             onSubmit={handleSubmit}

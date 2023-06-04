@@ -17,6 +17,7 @@ import InfoTooltip from './InfoTooltip';
 import ProtectedRouteElement from './ProtectedRoute';
 
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
+import { AppContext } from '../contexts/AppContext'
 
 
 function App() {  //функциональный компонент App
@@ -216,38 +217,39 @@ function App() {  //функциональный компонент App
   }
 
   return (
-    <CurrentUserContext.Provider value={currentUser}>
+    <AppContext.Provider value={isLoading}>
+      <CurrentUserContext.Provider value={currentUser}>
 
-      <div className="root">
+        <div className="root">
 
-        <div className="page">
+          <div className="page">
 
-          <Header
-            email={email}
-            onSignOut={onSignOut} />
+            <Header
+              email={email}
+              onSignOut={onSignOut} />
 
-          <Routes>
+            <Routes>
 
-            {/* sign-up - регистрация */}
-            <Route path='/sign-up' element={<Register onRegistration={handleRegistration} />} />
+              {/* sign-up - регистрация */}
+              <Route path='/sign-up' element={<Register onRegistration={handleRegistration} />} />
 
-            {/* sign-in - авторизация, вход, страница входа */}
-            <Route path='/sign-in' element={<Login onAuthorization={handleAuthorization} />} />
-            <Route path="/" element={<ProtectedRouteElement element={Main} loggedIn={loggedIn}
-              cards={cards}
-              onEditProfile={handleEditProfileClick}
-              onAddPlace={handleAddPlaceClick}
-              onEditAvatar={handleEditAvatarClick}
-              onCardClick={handleCardClick}
-              onCardLike={handleCardLike}
-              onCardDelete={handleCardDelete}
-            />} />
+              {/* sign-in - авторизация, вход, страница входа */}
+              <Route path='/sign-in' element={<Login onAuthorization={handleAuthorization} />} />
+              <Route path="/" element={<ProtectedRouteElement element={Main} loggedIn={loggedIn}
+                cards={cards}
+                onEditProfile={handleEditProfileClick}
+                onAddPlace={handleAddPlaceClick}
+                onEditAvatar={handleEditAvatarClick}
+                onCardClick={handleCardClick}
+                onCardLike={handleCardLike}
+                onCardDelete={handleCardDelete}
+              />} />
 
 
 
-          </Routes>
+            </Routes>
 
-          {/* 
+            {/* 
             <Main
               cards={cards}
               onEditProfile={handleEditProfileClick}
@@ -258,56 +260,54 @@ function App() {  //функциональный компонент App
               onCardDelete={handleCardDelete}
             /> */}
 
-          <Footer />
+            <Footer />
+
+          </div>
+
+          <EditProfilePopup
+            isOpen={isEditProfilePopupOpen}
+            onClose={closeAllPopups}
+            onUpdateUser={handleUpdateUser}
+          />
+
+          <AddPlacePopup
+            isOpen={isAddPlacePopupOpen}
+            onClose={closeAllPopups}
+            onAddPlace={handleAddPlaceSubmit}
+          />
+
+
+
+          <ImagePopup
+            onClose={closeAllPopups}
+            card={selectedCard}
+          />
+
+
+
+          <PopupWithForm
+            name='confirmation-remove'
+            title='Вы уверены?'
+            submitText='Да'
+          />
+
+
+          <EditAvatarPopup
+            isOpen={isEditAvatarPopupOpen}
+            onClose={closeAllPopups}
+            onUpdateAvatar={onUpdateAvatar}
+          />
+
+          <InfoTooltip
+            isOpen={isInfoTooltipPopupOpen}
+            onClose={closeAllPopups}
+            successAuthResponse={successAuthResponse}
+          />
+
 
         </div>
-
-        <EditProfilePopup
-          isOpen={isEditProfilePopupOpen}
-          onClose={closeAllPopups}
-          onUpdateUser={handleUpdateUser}
-          submitText={isLoading ? 'Сохранение' : 'Сохранить'}
-        />
-
-        <AddPlacePopup
-          isOpen={isAddPlacePopupOpen}
-          onClose={closeAllPopups}
-          onAddPlace={handleAddPlaceSubmit}
-          submitText={isLoading ? 'Создание' : 'Создать'}
-        />
-
-
-
-        <ImagePopup
-          onClose={closeAllPopups}
-          card={selectedCard}
-        />
-
-
-
-        <PopupWithForm
-          name='confirmation-remove'
-          title='Вы уверены?'
-          submitText='Да'
-        />
-
-
-        <EditAvatarPopup
-          isOpen={isEditAvatarPopupOpen}
-          onClose={closeAllPopups}
-          onUpdateAvatar={onUpdateAvatar}
-          submitText={isLoading ? 'Сохранение' : 'Сохранить'}
-        />
-
-        <InfoTooltip
-          isOpen={isInfoTooltipPopupOpen}
-          onClose={closeAllPopups}
-          successAuthResponse={successAuthResponse}
-        />
-
-
-      </div>
-    </CurrentUserContext.Provider>
+      </CurrentUserContext.Provider>
+    </AppContext.Provider>
   );
 }
 
