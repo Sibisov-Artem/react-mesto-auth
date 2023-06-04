@@ -1,4 +1,10 @@
-function PopupWithForm({ name, isOpen, onClose, title, children, submitText, onSubmit }) {
+import { useContext } from "react";
+import { AppContext } from "../contexts/AppContext";
+
+function PopupWithForm({ name, isOpen, title, children, submitText, onSubmit }) {
+
+    const { closeAllPopups: onClose } = useContext(AppContext);
+
     return (
         <div className={`popup popup_${name} ${isOpen && 'popup_opened'}`}>
 

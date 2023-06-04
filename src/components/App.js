@@ -217,7 +217,7 @@ function App() {  //функциональный компонент App
   }
 
   return (
-    <AppContext.Provider value={isLoading}>
+    <AppContext.Provider value={{ isLoading, closeAllPopups }}>
       <CurrentUserContext.Provider value={currentUser}>
 
         <div className="root">
@@ -266,20 +266,17 @@ function App() {  //функциональный компонент App
 
           <EditProfilePopup
             isOpen={isEditProfilePopupOpen}
-            onClose={closeAllPopups}
             onUpdateUser={handleUpdateUser}
           />
 
           <AddPlacePopup
             isOpen={isAddPlacePopupOpen}
-            onClose={closeAllPopups}
             onAddPlace={handleAddPlaceSubmit}
           />
 
 
 
           <ImagePopup
-            onClose={closeAllPopups}
             card={selectedCard}
           />
 
@@ -294,13 +291,11 @@ function App() {  //функциональный компонент App
 
           <EditAvatarPopup
             isOpen={isEditAvatarPopupOpen}
-            onClose={closeAllPopups}
             onUpdateAvatar={onUpdateAvatar}
           />
 
           <InfoTooltip
             isOpen={isInfoTooltipPopupOpen}
-            onClose={closeAllPopups}
             successAuthResponse={successAuthResponse}
           />
 

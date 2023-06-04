@@ -5,7 +5,7 @@ import { AppContext } from "../contexts/AppContext";
 
 function EditAvatarPopup(props) {
 
-    const isLoading = useContext(AppContext);
+    const {isLoading} = useContext(AppContext);
     const avatarRef = useRef(); // записываем объект, возвращаемый хуком, в переменную
 
     function handleSubmit(e) {
@@ -22,7 +22,6 @@ function EditAvatarPopup(props) {
             title='Обновить аватар'
             submitText={isLoading ? 'Сохранение' : 'Сохранить'}
             isOpen={props.isOpen}
-            onClose={props.onClose}
             onSubmit={handleSubmit}
 
             children={

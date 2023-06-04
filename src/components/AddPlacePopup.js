@@ -10,7 +10,7 @@ function AddPlacePopup(props) {
         setName(e.target.value);
     }
 */
-    const isLoading = useContext(AppContext);
+    const {isLoading} = useContext(AppContext);
     const { values, handleChange, setValues } = useForm({});
 
     /*
@@ -81,7 +81,6 @@ export function useForm(inputValues={}) {
             title='Новое место'
             submitText={isLoading ? 'Создание' : 'Создать'}
             isOpen={props.isOpen}
-            onClose={props.onClose}
             onSubmit={handleSubmit}
         >
 

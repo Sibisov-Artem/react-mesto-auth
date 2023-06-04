@@ -22,7 +22,7 @@ function EditProfilePopup(props) {
 
     // Подписка на контекст
     const currentUser = useContext(CurrentUserContext);
-    const isLoading = useContext(AppContext);
+    const { isLoading } = useContext(AppContext);
 
     // После загрузки текущего пользователя из API
     // его данные будут использованы в управляемых компонентах.
@@ -48,7 +48,6 @@ function EditProfilePopup(props) {
             title='Редактировать профиль'
             submitText={isLoading ? 'Сохранение' : 'Сохранить'}
             isOpen={props.isOpen}
-            onClose={props.onClose}
             onSubmit={handleSubmit}
         >
             {/* можно обойтись без children таким образом:

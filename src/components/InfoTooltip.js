@@ -1,7 +1,13 @@
 import registration_success from '../images/registration-success.jpg';
 import registration_fail from '../images/registration-fail.jpg';
 
-function InfoTooltip({ isOpen, onClose, successAuthResponse }) {
+import { useContext } from "react";
+import { AppContext } from "../contexts/AppContext";
+
+function InfoTooltip({ isOpen, successAuthResponse }) {
+
+    const { closeAllPopups: onClose } = useContext(AppContext);
+
     return (
         <div className={`popup ${isOpen && 'popup_opened'}`}>
 
