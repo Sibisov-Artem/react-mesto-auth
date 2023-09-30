@@ -4,7 +4,7 @@
 ---
 ## ***Описание и функциональность***
 
-![image](https://github.com/Sibisov-Artem/mesto-react-auth/blob/main/screenshot/screenshot.jpg)
+![image](https://github.com/Sibisov-Artem/react-mesto-auth/blob/main/screenshot/screenshot.jpg?raw=true)
 
 За основу был взят проект ["Место-React"](https://github.com/Sibisov-Artem/mesto-react), который был доработан за счет реализации регистрации и авторизации пользователей. Для сохранения сведений которых и соответсвующей работы была произведена интеграция с ещё одним API.
 
@@ -28,9 +28,8 @@
 
 ---
 
-
 ## ***Ссылка на выполненную работу на GitHub Pages:***
-**https://sibisov-artem.github.io/mesto-react-auth/**
+**https://sibisov-artem.github.io/react-mesto-auth/**
 
 ---
 
