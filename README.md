@@ -3,10 +3,8 @@
 
 ---
 ## ***Описание и функциональность***
-СДЕЛАТЬ СКРИНШОТ НОВЫЙСДЕЛАТЬ СКРИНШОТ НОВЫЙСДЕЛАТЬ СКРИНШОТ НОВЫЙ
-СДЕЛАТЬ СКРИНШОТ НОВЫЙ
-СДЕЛАТЬ СКРИНШОТ НОВЫЙ
-![image](https://github.com/Sibisov-Artem/mesto/blob/main/screenshot/screenshot.png)
+
+![image](https://github.com/Sibisov-Artem/mesto-react-auth/blob/main/screenshot/screenshot.jpg)
 
 За основу был взят проект ["Место-React"](https://github.com/Sibisov-Artem/mesto-react), который был доработан за счет реализации регистрации и авторизации пользователей. Для сохранения сведений которых и соответсвующей работы была произведена интеграция с ещё одним API.
 
@@ -29,12 +27,8 @@
  * Все данные хранятся на сервере, использовано стороннее API.
 
 ---
-СДЕЛАТЬ GitHub Pages
-СДЕЛАТЬ GitHub Pages
-СДЕЛАТЬ GitHub Pages
-СДЕЛАТЬ GitHub Pages
-СДЕЛАТЬ GitHub Pages
-СДЕЛАТЬ GitHub Pages
+
+
 ## ***Ссылка на выполненную работу на GitHub Pages:***
 **https://sibisov-artem.github.io/mesto-react-auth/**
 
